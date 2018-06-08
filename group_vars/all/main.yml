@@ -57,20 +57,12 @@ deployment_stamp: "init"
 secret_id: "1.0.0"
 
 # Services hosts
-lms_host: "{{ project_name }}-lms-{{ deployment_stamp }}.{{ domain_name }}"
-cms_host: "{{ project_name }}-cms-{{ deployment_stamp }}.{{ domain_name }}"
 richie_host: "{{ project_name }}-richie-{{ deployment_stamp }}.{{ domain_name }}"
 
 # Cluster databases (used for development or feature deployments)
 elasticsearch:
   host: "elasticsearch"
   port: "9200"
-mongodb:
-  host: "mongodb"
-  port: "27017"
-mysql:
-  host: "mysql"
-  port: "3306"
 postgresql:
   host: "postgresql"
   port: "5432"
@@ -82,44 +74,25 @@ richie_database:
 
 # Openshift template files
 openshift_deployments:
-  - openshift/edxapp/dc/cms.yml
-  - openshift/edxapp/dc/lms.yml
-  - openshift/edxapp/dc/memcached.yml
-  - openshift/edxapp/dc/nginx.yml
   - openshift/redirect/dc/nginx.yml
   - openshift/richie/dc/elasticsearch.yml
   - openshift/richie/dc/nginx.yml
   - openshift/richie/dc/richie.yml
 openshift_endpoints:
-  - openshift/common/ep/mongodb.yml
-  - openshift/common/ep/mysql.yml
   - openshift/common/ep/postgresql.yml
 openshift_jobs:
-  - openshift/edxapp/job/collectstatic_cms.yml
-  - openshift/edxapp/job/collectstatic_lms.yml
-  - openshift/edxapp/job/db_migrate.yml
   - openshift/richie/job/collectstatic.yml
   - openshift/richie/job/db_migrate.yml
   - openshift/richie/job/regenerate_indexes.yml
 openshift_routes:
-  - openshift/edxapp/route/cms.yml
-  - openshift/edxapp/route/lms.yml
   - openshift/richie/route/richie.yml
+ 
 openshift_services:
-  - openshift/common/svc/mongodb.yml
-  - openshift/common/svc/mysql.yml
   - openshift/common/svc/postgresql.yml
-  - openshift/edxapp/svc/cms.yml
-  - openshift/edxapp/svc/lms.yml
-  - openshift/edxapp/svc/memcached.yml
-  - openshift/edxapp/svc/nginx.yml
   - openshift/redirect/svc/nginx.yml
   - openshift/richie/svc/elasticsearch.yml
   - openshift/richie/svc/nginx.yml
   - openshift/richie/svc/richie.yml
 openshift_volumes:
-  - openshift/edxapp/pvc/data.yml
-  - openshift/edxapp/pvc/media.yml
-  - openshift/edxapp/pvc/static.yml
   - openshift/richie/pvc/media.yml
   - openshift/richie/pvc/static.yml
