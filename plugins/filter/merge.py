@@ -54,7 +54,7 @@ def merge_with_app(base, new):
             base_service[k] = sorted(list(set(new_service[k] + base_service[k])))
 
         # Add service missing keys (could be meta, such as host, etc.)
-        for k, v in new_service.iteritems():
+        for k, v in new_service.items():
             if base_service.get(k) is None:
                 base_service[k] = v
 
@@ -64,7 +64,7 @@ def merge_with_app(base, new):
         result["volumes"] = sorted(list(set(new["volumes"] + result["volumes"])))
 
     # Add new keys for this app
-    for k, v in new.iteritems():
+    for k, v in new.items():
         if k not in result:
             result[k] = v
 
@@ -136,7 +136,7 @@ def merge_with_database(base, database, app_name, customer, environment):
 
 
 # pylint: disable=no-self-use,too-few-public-methods
-class FilterModule(object):
+class FilterModule():
     """Filters used to deep merge python objects"""
 
     def filters(self):
